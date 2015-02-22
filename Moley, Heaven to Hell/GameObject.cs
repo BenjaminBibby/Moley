@@ -32,8 +32,6 @@ namespace Moley_Heaven_to_Hell
         }
         #endregion
 
-        //Testing SourceTree
-
         public GameObject(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
         {
             this.position = position;
