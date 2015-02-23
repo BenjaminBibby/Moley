@@ -15,10 +15,15 @@ namespace Moley_Heaven_to_Hell
         protected PointF velocity;
         protected float animationSpeed;
         private float currentFrameIndex;
-        protected Image sprite;
+        private Image sprite;
         protected List<Image> animationFrames;
         #endregion
         #region properties
+
+        public Image Sprite
+        {
+            get { return sprite; }
+        }
         public PointF Position
         {
           get { return position; }

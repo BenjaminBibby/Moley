@@ -11,8 +11,9 @@ namespace Moley_Heaven_to_Hell
     {
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X, position.Y, sprite.Width * size.X, sprite.Height * size.Y); }
+            get { return new RectangleF(position.X, position.Y, Sprite.Width * size.X, Sprite.Height * size.Y); }
         }
+
         public Platform(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
             : base(position, velocity, size, imagePath, animationSpeed)
         {
@@ -24,7 +25,7 @@ namespace Moley_Heaven_to_Hell
             base.Update(deltaTime);
             this.position.Y += velocity.Y;
 
-            if (this.position.Y + this.sprite.Height < 0)
+            if (this.position.Y + this.Sprite.Height < 0)
             {
                 Destroy(this);
             }
@@ -53,7 +54,8 @@ namespace Moley_Heaven_to_Hell
 
         public void OnCollision(GameObject other)
         {
-            
+            if (other is Mole)
+                other.SetPosition(new PointF(other.Position.X, this.position.Y - other.Sprite.Height * size.Y));
         }
     }
 }

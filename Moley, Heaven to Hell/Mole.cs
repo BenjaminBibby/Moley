@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace Moley_Heaven_to_Hell
 {
-    class Mole : GameObject
+    class Mole : GameObject, ICollidable
     {
         private bool walkLeft;
         private float maxSpeed, speed, gravitySpeed;
@@ -18,11 +18,14 @@ namespace Moley_Heaven_to_Hell
         public Mole(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
             : base(position, velocity, size, imagePath, animationSpeed)
         {
+            this.velocity.Y = 2;
             this.maxSpeed = 10;
         }
 
         public override void Update(float deltaTime)
         {
+            this.position.Y += velocity.Y;
+
             if (Keyboard.IsKeyDown(Keys.A) && this.position.X - speed > 0)
             {
                 if (walkLeft)
@@ -30,28 +33,16 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = false;
                 }
-                /*
-                if (speed <= 1)
-                {
-                    speed += 0.05f;
-                }
-                position.X -= speed * maxSpeed;*/
                 position.X -= Acceleration(0.04f);
                 state = State.walk;
             }
-            else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.sprite.Width * this.size.X)
+            else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.Sprite.Width * this.size.X)
             {
                 if (!walkLeft)
                 {
                     FlipSprite();
                     walkLeft = true;
                 }
-                /*
-                if (acceleration <= 1)
-                {
-                    acceleration += 0.05f;
-                }
-                position.X += speed * acceleration;*/
 
                 position.X += Acceleration(0.04f);
                 state = State.walk;
@@ -79,6 +70,26 @@ namespace Moley_Heaven_to_Hell
                 speed += acc;
             }
             return speed * maxSpeed;
+        }
+
+        public RectangleF CollisionBox
+        {
+            get { return new RectangleF(position.X,position.Y, this.Sprite.Width * size.X, this.Sprite.Height * size.Y); }
+        }
+
+        public bool IsCollidingWith(GameObject other)
+        {
+            return false;
+        }
+
+        public void CheckCollision()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCollision(GameObject other)
+        {
+            throw new NotImplementedException();
         }
     }
 }
