@@ -27,6 +27,7 @@ namespace Moley_Heaven_to_Hell
         public Image Sprite
         {
             get { return sprite; }
+            set { sprite = value;  }
         }
         public PointF Position
         {

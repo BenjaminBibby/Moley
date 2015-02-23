@@ -24,7 +24,37 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
-            this.position.Y += velocity.Y;
+            //If the player has reached the bottom of the screen
+            if (this.position.Y + this.Sprite.Height * this.Size.Y >= GameWorld.DisplayRectangle.Height)
+            {
+                this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
+            }
+
+            switch (state)
+            {
+                case State.fall:
+                    this.Sprite = this.animationFrames[2];//Change the sprite to the falling sprite
+                    break;
+                case State.walk:
+                    this.Sprite = this.animationFrames[1];//Change the sprite to the walking sprites
+                    break;
+                default:
+                    this.Sprite = this.animationFrames[0];//Change the sprite to the idle sprite
+                    break;
+            }
+
+            foreach (GameObject obj in GameWorld.Objects)
+            {
+                if (obj is ICollidable)//If the gameobject is Collidable
+                {
+                    if (!this.IsCollidingWith(obj) && (obj != this)) //If the mole is not colliding with an object
+                    {
+                        state = State.fall;//Sets the state to falling
+                    }
+                }
+            }
+
+            this.position.Y += velocity.Y;//Makes the mole fall downwards
 
             if (Keyboard.IsKeyDown(Keys.A) && this.position.X - speed > 0)
             {
@@ -79,7 +109,7 @@ namespace Moley_Heaven_to_Hell
 
         public bool IsCollidingWith(GameObject other)
         {
-            return false;
+            return CollisionBox.IntersectsWith((other as ICollidable).CollisionBox);
         }
 
         public void CheckCollision()

@@ -11,6 +11,7 @@ namespace Moley_Heaven_to_Hell
     class GameWorld
     {
         #region Field
+        private int maxRandom = 100;
         private Random rand = new Random();
         private static List<GameObject> tmpObjects, objects;
         private Stopwatch timer = new Stopwatch();
@@ -61,6 +62,7 @@ namespace Moley_Heaven_to_Hell
 
         public void GameLoop()
         {
+
             TimeSpan deltaTimeSpan = DateTime.Now - endTime;
             int milliSeconds = deltaTimeSpan.Milliseconds > 0 ? deltaTimeSpan.Milliseconds : 1;
             deltaTime = 1 / ((float)1000 / milliSeconds);
@@ -68,7 +70,21 @@ namespace Moley_Heaven_to_Hell
 
             if (timer.ElapsedMilliseconds >= 1500)
             {
-                objects.Add(new Platform(new PointF(rand.Next(0, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 0));
+                int random = rand.Next(0, maxRandom);
+                maxRandom++;
+                if (random < maxRandom * 0.25f)
+                {
+                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 0));
+                }
+                else if (random > maxRandom * 0.25f && random < maxRandom * 0.75f )
+                {
+                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground10.png", 0));
+                }
+                else if(random > maxRandom * 0.75f)
+                {
+                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground11.png", 0));
+                }
+
                 timer.Restart();
             }
 
