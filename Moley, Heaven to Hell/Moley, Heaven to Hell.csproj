@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Background.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +87,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fall.png" />
+    <Content Include="Sprites\Backgrounds\Dirt_BG.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Sprites\Mole\Fall.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
