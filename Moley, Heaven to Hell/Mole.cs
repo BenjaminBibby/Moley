@@ -36,7 +36,7 @@ namespace Moley_Heaven_to_Hell
                 position.X -= Acceleration(0.04f);
                 state = State.walk;
             }
-            else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.Sprite.Width * this.size.X)
+            else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.Sprite.Width * this.Size.X)
             {
                 if (!walkLeft)
                 {
@@ -74,7 +74,7 @@ namespace Moley_Heaven_to_Hell
 
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X,position.Y, this.Sprite.Width * size.X, this.Sprite.Height * size.Y); }
+            get { return new RectangleF(position.X,position.Y, this.Sprite.Width * Size.X, this.Sprite.Height * Size.Y); }
         }
 
         public bool IsCollidingWith(GameObject other)

@@ -11,7 +11,7 @@ namespace Moley_Heaven_to_Hell
     {
         #region field
         protected PointF position;
-        protected PointF size;
+        private PointF size;
         protected PointF velocity;
         protected float animationSpeed;
         private float currentFrameIndex;
@@ -20,6 +20,10 @@ namespace Moley_Heaven_to_Hell
         #endregion
         #region properties
 
+        public PointF Size
+        {
+            get { return size; }
+        }
         public Image Sprite
         {
             get { return sprite; }
