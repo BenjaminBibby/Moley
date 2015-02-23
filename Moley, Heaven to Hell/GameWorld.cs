@@ -55,8 +55,8 @@ namespace Moley_Heaven_to_Hell
             timer.Start();
             endTime = DateTime.Now;
 
-            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\Dirt_BG.png", 1, 0));
-            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Dirt_BG.png", 1, 0));
+            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\BackgroundBlur.png", 1, 0));
+            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Background1.png", 1, 0));
 
             // All the GameObjects that is in the world to start with, should be added here:
             Mole player = new Mole(new PointF(displayRectangle.Width/2, displayRectangle.Height/2 ), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png", 1, 5f);

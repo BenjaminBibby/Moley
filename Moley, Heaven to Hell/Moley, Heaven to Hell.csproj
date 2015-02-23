@@ -87,6 +87,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fall.png" />
+    <Content Include="Sprites\Backgrounds\Background1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sprites\Backgrounds\BackgroundBlur.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Sprites\Backgrounds\Dirt_BG.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
