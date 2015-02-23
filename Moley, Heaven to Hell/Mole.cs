@@ -10,17 +10,15 @@ namespace Moley_Heaven_to_Hell
 {
     class Mole : GameObject
     {
-        private int speed;
-        public float acceleration;
         private bool walkLeft;
-        private float maxSpeed;
+        private float maxSpeed, speed;
         private enum State { idle, walk, fall };
         private State state;
 
         public Mole(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
             : base(position, velocity, size, imagePath, animationSpeed)
         {
-            this.speed = 10;
+            this.maxSpeed = 10;
         }
 
         public override void Update(float deltaTime)
@@ -32,14 +30,14 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = false;
                 }
-
-                if (acceleration <= 1)
+                /*
+                if (speed <= 1)
                 {
-                    acceleration += 0.05f;
+                    speed += 0.05f;
                 }
-
+                position.X -= speed * maxSpeed;*/
+                position.X -= Acceleration(0.04f);
                 state = State.walk;
-                position.X -= speed * acceleration;
             }
             else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.sprite.Width * this.size.X)
             {
@@ -48,18 +46,20 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = true;
                 }
-
+                /*
                 if (acceleration <= 1)
                 {
                     acceleration += 0.05f;
                 }
+                position.X += speed * acceleration;*/
 
+                position.X += Acceleration(0.04f);
                 state = State.walk;
-                position.X += speed * acceleration;
             }
             else
             {
-                acceleration = 0;
+                speed = 0;
+
                 state = State.idle;
             }
 
@@ -71,6 +71,14 @@ namespace Moley_Heaven_to_Hell
             {
                 spr.RotateFlip(RotateFlipType.RotateNoneFlipX);
             }
+        }
+        private float Acceleration(float acc)
+        {
+            if (speed <= 1)
+            {
+                speed += acc;
+            }
+            return speed * maxSpeed;
         }
     }
 }

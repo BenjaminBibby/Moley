@@ -9,6 +9,10 @@ namespace Moley_Heaven_to_Hell
 {
     class Platform : GameObject, ICollidable
     {
+        public RectangleF CollisionBox
+        {
+            get { return new RectangleF(position.X, position.Y, sprite.Width * size.X, sprite.Height * size.Y); }
+        }
         public Platform(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
             : base(position, velocity, size, imagePath, animationSpeed)
         {
