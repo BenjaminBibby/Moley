@@ -30,7 +30,7 @@ namespace Moley_Heaven_to_Hell
                 this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
             }
 
-            switch (state)
+            /*switch (state)
             {
                 case State.fall:
                     this.Sprite = this.animationFrames[2];//Change the sprite to the falling sprite
@@ -41,7 +41,7 @@ namespace Moley_Heaven_to_Hell
                 default:
                     this.Sprite = this.animationFrames[0];//Change the sprite to the idle sprite
                     break;
-            }
+            }*/
 
             foreach (GameObject obj in GameWorld.Objects)
             {
