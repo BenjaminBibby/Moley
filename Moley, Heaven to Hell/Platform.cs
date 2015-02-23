@@ -28,6 +28,32 @@ namespace Moley_Heaven_to_Hell
             {
                 Destroy(this);
             }
+
+            CheckCollision();
+        }
+
+        public bool IsCollidingWith(GameObject other)
+        {
+            return CollisionBox.IntersectsWith((other as ICollidable).CollisionBox);
+        }
+
+        public void CheckCollision()
+        {
+            foreach (GameObject obj in GameWorld.Objects)
+            {
+                if (obj is ICollidable)
+                {
+                    if (this.IsCollidingWith(obj) && (obj != this))
+                    {
+                        OnCollision(obj);
+                    }
+                }
+            }
+        }
+
+        public void OnCollision(GameObject other)
+        {
+            
         }
     }
 }

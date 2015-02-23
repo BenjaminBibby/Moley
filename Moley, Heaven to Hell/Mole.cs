@@ -11,7 +11,7 @@ namespace Moley_Heaven_to_Hell
     class Mole : GameObject
     {
         private bool walkLeft;
-        private float maxSpeed, speed;
+        private float maxSpeed, speed, gravitySpeed;
         private enum State { idle, walk, fall };
         private State state;
 

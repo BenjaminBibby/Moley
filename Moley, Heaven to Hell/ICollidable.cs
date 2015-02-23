@@ -13,5 +13,9 @@ namespace Moley_Heaven_to_Hell
         {
             get;
         }
+        bool IsCollidingWith(GameObject other);
+        void CheckCollision();
+        void OnCollision(GameObject other);
+
     }
 }
