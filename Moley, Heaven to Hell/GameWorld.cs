@@ -70,25 +70,21 @@ namespace Moley_Heaven_to_Hell
 
             if (timer.ElapsedMilliseconds >= 1500)
             {
-<<<<<<< HEAD
                 objects.Add(new Platform(new PointF(rand.Next(0, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 1, 0));
-=======
                 int random = rand.Next(0, maxRandom);
                 maxRandom++;
                 if (random < maxRandom * 0.25f)
                 {
-                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 0));
+                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 1, 0));
                 }
                 else if (random > maxRandom * 0.25f && random < maxRandom * 0.75f )
                 {
-                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground10.png", 0));
+                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground10.png", 1, 0));
                 }
                 else if(random > maxRandom * 0.75f)
                 {
-                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground11.png", 0));
+                    objects.Add(new Platform(new PointF(rand.Next(-50, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground11.png", 1, 0));
                 }
-
->>>>>>> 84c0d94daf635b623e7c89cef2a35db60797890f
                 timer.Restart();
             }
 
