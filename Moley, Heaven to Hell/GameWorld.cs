@@ -70,7 +70,6 @@ namespace Moley_Heaven_to_Hell
 
             if (timer.ElapsedMilliseconds >= 1500)
             {
-                objects.Add(new Platform(new PointF(rand.Next(0, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 1, 0));
                 int random = rand.Next(0, maxRandom);
                 maxRandom++;
                 if (random < maxRandom * 0.25f)
