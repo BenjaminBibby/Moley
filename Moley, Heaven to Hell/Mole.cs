@@ -15,8 +15,8 @@ namespace Moley_Heaven_to_Hell
         private enum State { idle, walk, fall };
         private State state;
 
-        public Mole(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
-            : base(position, velocity, size, imagePath, animationSpeed)
+        public Mole(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
+            : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
         {
             this.velocity.Y = 2;
             this.maxSpeed = 10;
@@ -33,8 +33,11 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = false;
                 }
-                position.X -= Acceleration(0.04f);
-                state = State.walk;
+                if (PlaceFree_x(-3))
+                {
+                    position.X -= Acceleration(0.04f);
+                    state = State.walk;
+                }
             }
             else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.Sprite.Width * this.Size.X)
             {
@@ -43,9 +46,11 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = true;
                 }
-
-                position.X += Acceleration(0.04f);
-                state = State.walk;
+                if (PlaceFree_x(3))
+                {
+                    position.X += Acceleration(0.04f);
+                    state = State.walk;
+                }
             }
             else
             {
@@ -90,6 +95,34 @@ namespace Moley_Heaven_to_Hell
         public void OnCollision(GameObject other)
         {
             throw new NotImplementedException();
+        }
+        private bool PlaceFree_x(int x)
+        {
+            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, 0);
+
+            // Setting the offset of the checkbox
+            if (x > 0)
+            {
+                checkBox.X += CollisionBox.Width;
+                checkBox.Width = x;
+            }
+            else
+            {
+                checkBox.X += x;
+                checkBox.Width = -x;
+            }
+            foreach (GameObject obj in GameWorld.Objects)
+            {
+                if (obj is ICollidable && obj != this)
+                {
+                    if (checkBox.IntersectsWith((obj as ICollidable).CollisionBox))
+                    {
+                        return false;
+                    }
+                }
+            }
+            
+            return true;
         }
     }
 }

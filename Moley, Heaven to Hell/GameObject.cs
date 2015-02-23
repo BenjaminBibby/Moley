@@ -41,8 +41,9 @@ namespace Moley_Heaven_to_Hell
         }
         #endregion
 
-        public GameObject(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
+        public GameObject(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
         {
+            //string[] images = new string[imageAmount];
             this.position = position;
             this.velocity = velocity;
             this.size = size;

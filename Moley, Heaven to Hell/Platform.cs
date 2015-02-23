@@ -14,8 +14,8 @@ namespace Moley_Heaven_to_Hell
             get { return new RectangleF(position.X, position.Y, Sprite.Width * Size.X, Sprite.Height * Size.Y); }
         }
 
-        public Platform(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
-            : base(position, velocity, size, imagePath, animationSpeed)
+        public Platform(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
+            : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
         {
             
         }

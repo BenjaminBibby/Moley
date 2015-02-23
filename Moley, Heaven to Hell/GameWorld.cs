@@ -55,7 +55,7 @@ namespace Moley_Heaven_to_Hell
             endTime = DateTime.Now;
 
             // All the GameObjects that is in the world to start with, should be added here:
-            Mole player = new Mole(new PointF(displayRectangle.Width/2, displayRectangle.Height/2 ), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png", 5f);
+            Mole player = new Mole(new PointF(displayRectangle.Width/2, displayRectangle.Height/2 ), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png", 1, 5f);
             objects.Add(player);
         }
 
@@ -68,7 +68,7 @@ namespace Moley_Heaven_to_Hell
 
             if (timer.ElapsedMilliseconds >= 1500)
             {
-                objects.Add(new Platform(new PointF(rand.Next(0, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 0));
+                objects.Add(new Platform(new PointF(rand.Next(0, displayRectangle.Width - 128), displayRectangle.Height), new PointF(0, -3), new PointF(1, 1), @"Sprites\Platforms\ground0.png", 1, 0));
                 timer.Restart();
             }
 
