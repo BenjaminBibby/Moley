@@ -24,9 +24,13 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
-            if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
             {
                 state = State.fall;
+            }
+            else if(state != State.walk)
+            {
+                state = State.idle;
             }
 
             //If the player has reached the bottom of the screen
@@ -36,15 +40,15 @@ namespace Moley_Heaven_to_Hell
             }
 
             // Adjust animation to current state of movement
-            if ((base.currentFrameIndex >= 2) && state == State.walk)// Idle
+            if ((base.currentFrameIndex >= 2) && state == State.walk)//Walk
             {
                 base.currentFrameIndex = 0;
             }
-            else if ((base.currentFrameIndex > 2 || base.currentFrameIndex < 1) && state == State.fall)   // Walk
+            else if ((base.currentFrameIndex >= 2 || base.currentFrameIndex <= 1) && state == State.fall)   //Fall
             {
                 base.currentFrameIndex = 2;
             }
-            else if ((base.currentFrameIndex > 3 || base.currentFrameIndex < 2) && state == State.idle)  // fall
+            else if ((base.currentFrameIndex >= 3 || base.currentFrameIndex <= 2) && state == State.idle)  //Idle
             {
                 base.currentFrameIndex = 3;
             }
@@ -61,7 +65,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(-15))
                 {
                     position.X -= Acceleration(0.04f);
-                    if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+                    if (!PlaceFree_y(1));
                     state = State.walk;
                 }
             }
@@ -75,7 +79,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(15))
                 {
                     position.X += Acceleration(0.04f);
-                    if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+                    if (!PlaceFree_y(1))
                     state = State.walk;
                 }
             }
@@ -154,7 +158,7 @@ namespace Moley_Heaven_to_Hell
 
         private bool PlaceFree_y(int y)
         {
-            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, 0);
+            RectangleF checkBox = new RectangleF(position.X, position.Y, CollisionBox.Width, 0);
 
             // Setting the offset of the checkbox
             if (y > 0)
