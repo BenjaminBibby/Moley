@@ -30,14 +30,18 @@ namespace Moley_Heaven_to_Hell
                 this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
             }
 
-            switch (state)
+            // Adjust animation to current state of movement
+            if ((base.currentFrameIndex >= 2) && state == State.walk)// Idle
             {
-                case State.fall:
-                    break;
-                case State.walk:
-                    break;
-                case State.idle:
-                    break;
+                base.currentFrameIndex = 0;
+            }
+            else if ((base.currentFrameIndex > 2 || base.currentFrameIndex < 1) && state == State.fall)   // Walk
+            {
+                base.currentFrameIndex = 2;
+            }
+            else if ((base.currentFrameIndex > 3 || base.currentFrameIndex < 2) && state == State.idle)  // fall
+            {
+                base.currentFrameIndex = 3;
             }
 
             foreach (GameObject obj in GameWorld.Objects)
@@ -63,6 +67,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(-15))
                 {
                     position.X -= Acceleration(0.04f);
+                    if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
                     state = State.walk;
                 }
             }
@@ -76,6 +81,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(15))
                 {
                     position.X += Acceleration(0.04f);
+                    if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
                     state = State.walk;
                 }
             }

@@ -14,7 +14,7 @@ namespace Moley_Heaven_to_Hell
         private PointF size;
         protected PointF velocity;
         protected float animationSpeed;
-        private float currentFrameIndex;
+        protected float currentFrameIndex;
         private Image sprite;
         protected List<Image> animationFrames;
         #endregion
