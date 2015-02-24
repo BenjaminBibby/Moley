@@ -24,15 +24,11 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
-<<<<<<< HEAD
-            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
-=======
             base.Update(deltaTime);
 
             CheckCollision();
 
             if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
->>>>>>> 0686e973ba58c4dfb9b688d08149ed72eaab1b2c
             {
                 state = State.fall;
             }
@@ -94,7 +90,7 @@ namespace Moley_Heaven_to_Hell
             else
             {
                 speed = 0;
-                if(state != State.fall)
+                if (state != State.fall) ;
                 state = State.idle;
             }
         }
@@ -201,17 +197,6 @@ namespace Moley_Heaven_to_Hell
             }
 
             return true;
-        }
-        private void AvoidStuck()
-        {
-            float[] directions = new float[4];
-            directions[0] = directions[1] = position.X;
-            directions[2] = directions[3] = position.Y;
-
-            for (int i = 0; i < directions.Length; i++)
-            {
-                return;
-            }
         }
     }
 }
