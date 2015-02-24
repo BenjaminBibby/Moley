@@ -63,7 +63,7 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = false;
                 }
-                if (PlaceFree_x(-3))
+                if (PlaceFree_x(-15))
                 {
                     position.X -= Acceleration(0.04f);
                     state = State.walk;
@@ -76,7 +76,7 @@ namespace Moley_Heaven_to_Hell
                     FlipSprite();
                     walkLeft = true;
                 }
-                if (PlaceFree_x(3))
+                if (PlaceFree_x(15))
                 {
                     position.X += Acceleration(0.04f);
                     state = State.walk;
@@ -152,6 +152,35 @@ namespace Moley_Heaven_to_Hell
                 }
             }
             
+            return true;
+        }
+
+        private bool PlaceFree_y(int y)
+        {
+            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, 0);
+
+            // Setting the offset of the checkbox
+            if (y > 0)
+            {
+                checkBox.Y += CollisionBox.Height;
+                checkBox.Height = y;
+            }
+            else
+            {
+                checkBox.Y += y;
+                checkBox.Height = -y;
+            }
+            foreach (GameObject obj in GameWorld.Objects)
+            {
+                if (obj is ICollidable && obj != this)
+                {
+                    if (checkBox.IntersectsWith((obj as ICollidable).CollisionBox))
+                    {
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
     }
