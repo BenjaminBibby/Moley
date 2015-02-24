@@ -24,7 +24,15 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
+<<<<<<< HEAD
             if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+=======
+            base.Update(deltaTime);
+
+            CheckCollision();
+
+            if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+>>>>>>> 0686e973ba58c4dfb9b688d08149ed72eaab1b2c
             {
                 state = State.fall;
             }
@@ -89,8 +97,6 @@ namespace Moley_Heaven_to_Hell
                 if(state != State.fall)
                 state = State.idle;
             }
-
-            base.Update(deltaTime);
         }
         private void FlipSprite()
         {
@@ -120,16 +126,28 @@ namespace Moley_Heaven_to_Hell
 
         public void CheckCollision()
         {
-            throw new NotImplementedException();
+            foreach (GameObject obj in GameWorld.Objects)
+            {
+                if (obj is ICollidable)
+                {
+                    if (this.IsCollidingWith(obj) && (obj != this))
+                    {
+                        OnCollision(obj);
+                    }
+                }
+            }
         }
 
         public void OnCollision(GameObject other)
         {
-            throw new NotImplementedException();
+            while ((position.Y + CollisionBox.Height) >= other.Position.Y)
+            {
+                position.Y --;
+            }
         }
         private bool PlaceFree_x(int x)
         {
-            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, 0);
+            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, CollisionBox.Height - 2);   // the reducing of 2, ensures it doesn't mess up with collision
 
             // Setting the offset of the checkbox
             if (x > 0)
@@ -183,6 +201,17 @@ namespace Moley_Heaven_to_Hell
             }
 
             return true;
+        }
+        private void AvoidStuck()
+        {
+            float[] directions = new float[4];
+            directions[0] = directions[1] = position.X;
+            directions[2] = directions[3] = position.Y;
+
+            for (int i = 0; i < directions.Length; i++)
+            {
+                return;
+            }
         }
     }
 }
