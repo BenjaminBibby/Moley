@@ -180,10 +180,5 @@ namespace Moley_Heaven_to_Hell
 
             return true;
         }
-        private void AvoidStuck()
-        {
-            float[] directions = new float[4];
-            //directions[0] = directions[1] = directions[2] = directions[3] = 0;
-        }
     }
 }

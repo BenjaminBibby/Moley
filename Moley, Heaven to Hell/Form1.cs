@@ -19,6 +19,7 @@ namespace Moley_Heaven_to_Hell
             InitializeComponent();
 
             this.Size = new Size(540, 800);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
