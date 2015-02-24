@@ -104,8 +104,8 @@ namespace Moley_Heaven_to_Hell
                 obj.Draw(dc);
             }
 #if DEBUG
-            dc.DrawString("Fps: " + 1 / deltaTime, f, Brushes.Black, 0, 0);
-            dc.DrawString("Items: " + objects.Count, f, Brushes.Black, 0, 32);
+            dc.DrawString("Fps: " + 1 / deltaTime, f, Brushes.White, 0, 0);
+            dc.DrawString("Items: " + objects.Count, f, Brushes.White, 0, 32);
 
 #endif
             backBuffer.Render();

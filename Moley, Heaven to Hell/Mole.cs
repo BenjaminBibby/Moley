@@ -30,24 +30,21 @@ namespace Moley_Heaven_to_Hell
                 this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
             }
 
-            /*switch (state)
+            switch (state)
             {
                 case State.fall:
-                    this.Sprite = this.animationFrames[2];//Change the sprite to the falling sprite
                     break;
                 case State.walk:
-                    this.Sprite = this.animationFrames[1];//Change the sprite to the walking sprites
                     break;
-                default:
-                    this.Sprite = this.animationFrames[0];//Change the sprite to the idle sprite
+                case State.idle:
                     break;
-            }*/
+            }
 
             foreach (GameObject obj in GameWorld.Objects)
             {
                 if (obj is ICollidable)//If the gameobject is Collidable
                 {
-                    if (!this.IsCollidingWith(obj) && (obj != this)) //If the mole is not colliding with an object
+                    if (this.IsCollidingWith(obj) == false) //If the mole is not colliding with an object
                     {
                         state = State.fall;//Sets the state to falling
                     }
@@ -85,7 +82,7 @@ namespace Moley_Heaven_to_Hell
             else
             {
                 speed = 0;
-
+                if(state != State.fall)
                 state = State.idle;
             }
 

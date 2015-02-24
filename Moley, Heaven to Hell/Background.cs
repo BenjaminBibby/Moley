@@ -18,7 +18,7 @@ namespace Moley_Heaven_to_Hell
         public override void Update(float deltaTime)
         {
             position.Y -= velocity.Y;
-            if (position.Y + this.Sprite.Height * this.Size.Y <= 1)
+            if (position.Y + this.Sprite.Height * this.Size.Y <= 2)
             {
                 position.Y = GameWorld.DisplayRectangle.Height;
             }
