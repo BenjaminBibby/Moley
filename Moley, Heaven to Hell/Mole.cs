@@ -24,6 +24,11 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
+            if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+            {
+                state = State.fall;
+            }
+
             //If the player has reached the bottom of the screen
             if (this.position.Y + this.Sprite.Height * this.Size.Y >= GameWorld.DisplayRectangle.Height)
             {
@@ -42,17 +47,6 @@ namespace Moley_Heaven_to_Hell
             else if ((base.currentFrameIndex > 3 || base.currentFrameIndex < 2) && state == State.idle)  // fall
             {
                 base.currentFrameIndex = 3;
-            }
-
-            foreach (GameObject obj in GameWorld.Objects)
-            {
-                if (obj is ICollidable)//If the gameobject is Collidable
-                {
-                    if (this.IsCollidingWith(obj) == false) //If the mole is not colliding with an object
-                    {
-                        state = State.fall;//Sets the state to falling
-                    }
-                }
             }
 
             this.position.Y += velocity.Y;//Makes the mole fall downwards
