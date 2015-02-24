@@ -55,8 +55,8 @@ namespace Moley_Heaven_to_Hell
             timer.Start();
             endTime = DateTime.Now;
 
-            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\Dirt_BG.png", 1, 0));
-            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Dirt_BG.png", 1, 0));
+            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\Background1.png", 1, 0));
+            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Background1.png", 1, 0));
 
             // All the GameObjects that is in the world to start with, should be added here:
             Mole player = new Mole(new PointF(displayRectangle.Width/2, displayRectangle.Height/2 ), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png", 1, 5f);
@@ -104,8 +104,8 @@ namespace Moley_Heaven_to_Hell
                 obj.Draw(dc);
             }
 #if DEBUG
-            dc.DrawString("Fps: " + 1 / deltaTime, f, Brushes.Black, 0, 0);
-            dc.DrawString("Items: " + objects.Count, f, Brushes.Black, 0, 32);
+            dc.DrawString("Fps: " + 1 / deltaTime, f, Brushes.White, 0, 0);
+            dc.DrawString("Items: " + objects.Count, f, Brushes.White, 0, 32);
 
 #endif
             backBuffer.Render();

@@ -87,7 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fall.png" />
-    <Content Include="Sprites\Backgrounds\Dirt_BG.png">
+    <Content Include="Sprites\Backgrounds\Background1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Sprites\Mole\Fall.png">
