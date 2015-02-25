@@ -27,11 +27,18 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
+<<<<<<< HEAD
             if (!GameWorld.GameRunning && Keyboard.IsKeyDown(Keys.Space))
             {
                 this.position = startPos;
                 this.velocity = startVelocity;
                 GameWorld.GameRunning = true;
+=======
+<<<<<<< HEAD
+            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+=======
+            base.Update(deltaTime);
+>>>>>>> parent of a5632a2... Small fixes
 
                 foreach (GameObject obj in GameWorld.TmpObjects)
                 {
@@ -42,7 +49,12 @@ namespace Moley_Heaven_to_Hell
                 }
             }
 
+<<<<<<< HEAD
             if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+=======
+            if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+>>>>>>> 0686e973ba58c4dfb9b688d08149ed72eaab1b2c
+>>>>>>> parent of a5632a2... Small fixes
             {
                 state = State.fall;
             }
@@ -88,7 +100,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(-15))
                 {
                     position.X -= Acceleration(0.04f);
-                    if (!PlaceFree_y(1))
+                    if (!PlaceFree_y(1));
                     state = State.walk;
                 }
             }
@@ -112,6 +124,7 @@ namespace Moley_Heaven_to_Hell
                 if(state != State.fall)
                 state = State.idle;
             }
+<<<<<<< HEAD
 
             base.Update(deltaTime);
         }
@@ -119,6 +132,8 @@ namespace Moley_Heaven_to_Hell
         {
             dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
             base.Draw(dc);
+=======
+>>>>>>> parent of a5632a2... Small fixes
         }
         private void FlipSprite()
         {
@@ -211,6 +226,17 @@ namespace Moley_Heaven_to_Hell
             }
 
             return true;
+        }
+        private void AvoidStuck()
+        {
+            float[] directions = new float[4];
+            directions[0] = directions[1] = position.X;
+            directions[2] = directions[3] = position.Y;
+
+            for (int i = 0; i < directions.Length; i++)
+            {
+                return;
+            }
         }
     }
 }
