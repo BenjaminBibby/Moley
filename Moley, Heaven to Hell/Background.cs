@@ -17,8 +17,8 @@ namespace Moley_Heaven_to_Hell
             set { startVelocity = value; }
         }
 
-        public Background(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
-            : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
+        public Background(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
+            : base(position, velocity, size, imagePath, animationSpeed)
         {
             this.startVelocity = velocity;  
         }

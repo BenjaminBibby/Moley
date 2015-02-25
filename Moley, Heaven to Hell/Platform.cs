@@ -14,8 +14,8 @@ namespace Moley_Heaven_to_Hell
             get { return new RectangleF(position.X, position.Y, Sprite.Width * Size.X, Sprite.Height * Size.Y * 0.5f); }
         }
 
-        public Platform(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
-            : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
+        public Platform(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
+            : base(position, velocity, size, imagePath, animationSpeed)
         {
             
         }
@@ -67,8 +67,6 @@ namespace Moley_Heaven_to_Hell
             {
                 other.Position = new PointF(other.Position.X, other.Position.Y - 1);
             }
-            /*if (other is Mole && (other as ICollidable).CollisionBox.Y + (other as ICollidable).CollisionBox.Height < this.position.Y + this.CollisionBox.Height)
-                other.SetPosition(new PointF(other.Position.X, this.position.Y - (other as ICollidable).CollisionBox.Height));*/
         }
     }
 }

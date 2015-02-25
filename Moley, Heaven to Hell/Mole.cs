@@ -13,11 +13,11 @@ namespace Moley_Heaven_to_Hell
         private bool walkLeft;
         private PointF startPos, startVelocity;
         private float maxSpeed, speed, gravitySpeed;
-        private enum State { idle, walk, fall };
+        private enum State { idle, walk, fall, dig};
         private State state;
 
-        public Mole(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
-            : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
+        public Mole(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
+            : base(position, velocity, size, imagePath, animationSpeed)
         {
             this.velocity.Y = 2;
             this.maxSpeed = 10;
@@ -62,23 +62,13 @@ namespace Moley_Heaven_to_Hell
                 //this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
             }
 
-            // Adjust animation to current state of movement
-            if ((base.currentFrameIndex >= 2) && state == State.walk)//Walk
-            {
-                base.currentFrameIndex = 0;
-            }
-            else if ((base.currentFrameIndex >= 2 || base.currentFrameIndex <= 1) && state == State.fall)   //Fall
-            {
-                base.currentFrameIndex = 2;
-            }
-            else if ((base.currentFrameIndex >= 3 || base.currentFrameIndex <= 2) && state == State.idle)  //Idle
-            {
-                base.currentFrameIndex = 3;
-            }
-
             this.position.Y += velocity.Y;//Makes the mole fall downwards
-
-            if (Keyboard.IsKeyDown(Keys.A) && this.position.X - speed > 0)
+            
+            if (Keyboard.IsKeyDown(Keys.S))
+            {
+                state = State.dig;
+            }
+            else if (Keyboard.IsKeyDown(Keys.A) && this.position.X - speed > 0 && state != State.dig)
             {
                 if (walkLeft)
                 {
@@ -92,7 +82,7 @@ namespace Moley_Heaven_to_Hell
                     state = State.walk;
                 }
             }
-            else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.Sprite.Width * this.Size.X)
+            else if (Keyboard.IsKeyDown(Keys.D) && this.position.X + speed < GameWorld.DisplayRectangle.Width - this.Sprite.Width * this.Size.X && state != State.dig)
             {
                 if (!walkLeft)
                 {
@@ -113,12 +103,38 @@ namespace Moley_Heaven_to_Hell
                 state = State.idle;
             }
 
+
             base.Update(deltaTime);
         }
+
+        public override void UpdateAnimation(float deltaTime)
+        {
+            // Adjust animation to current state of movement
+            if ((base.currentFrameIndex >= 2) && state == State.walk)//Walk
+            {
+                base.currentFrameIndex = 0;
+            }
+            else if ((base.currentFrameIndex >= 2 || base.currentFrameIndex <= 1) && state == State.fall)   //Fall
+            {
+                base.currentFrameIndex = 2;
+            }
+            else if ((base.currentFrameIndex >= 3 || base.currentFrameIndex <= 2) && state == State.idle)  //Idle
+            {
+                base.currentFrameIndex = 3;
+            }
+            else if ((base.currentFrameIndex > 6 || base.currentFrameIndex <= 3) && state == State.dig)  //Idle
+            {
+                base.currentFrameIndex = 4;
+            }
+            base.UpdateAnimation(deltaTime);
+        }
+
         public override void Draw(Graphics dc)
         {
 #if DEBUG
             dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+            dc.DrawString("State: " + state.ToString(), new Font("Arial", 16), Brushes.White, 0, 64);
+            dc.DrawString("Sprite: " + (int)base.currentFrameIndex, new Font("Arial", 16), Brushes.White, 0, 96);
 #endif
             base.Draw(dc);
         }
