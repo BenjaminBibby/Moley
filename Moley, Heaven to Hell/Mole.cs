@@ -24,11 +24,15 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
+<<<<<<< HEAD
             base.Update(deltaTime);
 
             CheckCollision();
 
             if (PlaceFree_y(5))
+=======
+            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+>>>>>>> 61b476864f735cc7dfcd66de67ec57cf2a422105
             {
                 state = State.fall;
             }
@@ -93,6 +97,8 @@ namespace Moley_Heaven_to_Hell
                 if(state != State.fall)
                 state = State.idle;
             }
+
+            base.Update(deltaTime);
         }
 
         public override void Draw(Graphics dc)
@@ -129,28 +135,16 @@ namespace Moley_Heaven_to_Hell
 
         public void CheckCollision()
         {
-            foreach (GameObject obj in GameWorld.Objects)
-            {
-                if (obj is ICollidable)
-                {
-                    if (this.IsCollidingWith(obj) && (obj != this))
-                    {
-                        OnCollision(obj);
-                    }
-                }
-            }
+            throw new NotImplementedException();
         }
 
         public void OnCollision(GameObject other)
         {
-            while ((position.Y + CollisionBox.Height) >= other.Position.Y)
-            {
-                position.Y --;
-            }
+            throw new NotImplementedException();
         }
         private bool PlaceFree_x(int x)
         {
-            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, CollisionBox.Height - 2);   // the reducing of 2, ensures it doesn't mess up with collision
+            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, 0);
 
             // Setting the offset of the checkbox
             if (x > 0)
