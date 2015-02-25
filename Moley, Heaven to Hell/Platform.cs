@@ -33,10 +33,19 @@ namespace Moley_Heaven_to_Hell
             CheckCollision();
         }
 
+        public override void Draw(Graphics dc)
+        {
+#if DEBUG
+            dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+#endif
+            base.Draw(dc);
+        }
+
         public bool IsCollidingWith(GameObject other)
         {
             return CollisionBox.IntersectsWith((other as ICollidable).CollisionBox);
         }
+
 
         public void CheckCollision()
         {
@@ -54,8 +63,8 @@ namespace Moley_Heaven_to_Hell
 
         public void OnCollision(GameObject other)
         {
-            if (other is Mole && other.Position.Y + other.Sprite.Height * other.Size.Y < this.position.Y + this.Sprite.Height * this.Size.Y)
-                other.SetPosition(new PointF(other.Position.X, this.position.Y - other.Sprite.Height * other.Size.Y));
+            if (other is Mole && (other as ICollidable).CollisionBox.Y + (other as ICollidable).CollisionBox.Height < this.position.Y + this.CollisionBox.Height)
+                other.SetPosition(new PointF(other.Position.X, this.position.Y - (other as ICollidable).CollisionBox.Height));
         }
     }
 }

@@ -117,7 +117,9 @@ namespace Moley_Heaven_to_Hell
         }
         public override void Draw(Graphics dc)
         {
+#if DEBUG
             dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+#endif
             base.Draw(dc);
         }
         private void FlipSprite()
@@ -138,7 +140,7 @@ namespace Moley_Heaven_to_Hell
 
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X + 10,position.Y + 5, 50, 70); }
+            get { return new RectangleF(position.X + this.Sprite.Width * 0.1f,position.Y, 50, 75); }
         }
 
         public bool IsCollidingWith(GameObject other)
