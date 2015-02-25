@@ -214,5 +214,12 @@ namespace Moley_Heaven_to_Hell
 
             return true;
         }
+        private void Diging()
+        {
+            if (state == State.dig && currentFrameIndex >= 5)
+            {
+                SetPosition(new PointF(position.X, position.Y + 200));
+            }
+        }
     }
 }
