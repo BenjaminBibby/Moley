@@ -20,7 +20,6 @@ namespace Moley_Heaven_to_Hell
             
         }
 
-
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
