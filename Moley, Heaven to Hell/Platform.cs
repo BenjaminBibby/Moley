@@ -11,7 +11,7 @@ namespace Moley_Heaven_to_Hell
     {
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X, position.Y, Sprite.Width * Size.X, Sprite.Height * Size.Y); }
+            get { return new RectangleF(position.X, position.Y, Sprite.Width * Size.X, Sprite.Height * Size.Y * 0.5f); }
         }
 
         public Platform(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
