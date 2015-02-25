@@ -138,7 +138,7 @@ namespace Moley_Heaven_to_Hell
 
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X + 10,position.Y + 5, 50, 70); }
+            get { return new RectangleF(position.X + 20,position.Y + 5, 50, 70); }
         }
 
         public bool IsCollidingWith(GameObject other)
