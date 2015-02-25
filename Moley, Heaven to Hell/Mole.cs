@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace Moley_Heaven_to_Hell
 {
@@ -12,6 +13,7 @@ namespace Moley_Heaven_to_Hell
     {
         private bool walkLeft;
         private PointF startPos, startVelocity;
+        private Stopwatch timer = new Stopwatch();
         private float maxSpeed, speed, gravitySpeed;
         private enum State { idle, walk, fall, dig};
         private State state;
@@ -63,10 +65,21 @@ namespace Moley_Heaven_to_Hell
             }
 
             this.position.Y += velocity.Y;//Makes the mole fall downwards
-            
-            if (Keyboard.IsKeyDown(Keys.S))
+
+            if (!Keyboard.IsKeyDown(Keys.S) || state != State.dig)
             {
+                timer.Reset();
+            }
+
+            if (Keyboard.IsKeyDown(Keys.S) && !PlaceFree_y(5))
+            {
+                timer.Start();
                 state = State.dig;
+                
+                if (timer.ElapsedMilliseconds >= 1250)
+                {
+                    Diging();
+                }
             }
             else if (Keyboard.IsKeyDown(Keys.A) && this.position.X - speed > 0 && state != State.dig)
             {
@@ -110,7 +123,7 @@ namespace Moley_Heaven_to_Hell
         public override void UpdateAnimation(float deltaTime)
         {
             // Adjust animation to current state of movement
-            if ((base.currentFrameIndex >= 2) && state == State.walk)//Walk
+            if ((base.currentFrameIndex >= 1.9f) && state == State.walk)//Walk
             {
                 base.currentFrameIndex = 0;
             }
@@ -122,7 +135,7 @@ namespace Moley_Heaven_to_Hell
             {
                 base.currentFrameIndex = 3;
             }
-            else if ((base.currentFrameIndex > 6 || base.currentFrameIndex <= 3) && state == State.dig)  //Dig
+            else if ((base.currentFrameIndex >= 5.9f || base.currentFrameIndex <= 4) && state == State.dig)  //Dig
             {
                 base.currentFrameIndex = 4;
             }
@@ -134,7 +147,8 @@ namespace Moley_Heaven_to_Hell
 #if DEBUG
             dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
             dc.DrawString("State: " + state.ToString(), new Font("Arial", 16), Brushes.White, 0, 64);
-            dc.DrawString("Sprite: " + (int)base.currentFrameIndex, new Font("Arial", 16), Brushes.White, 0, 96);
+            dc.DrawString("Sprite: " + base.currentFrameIndex, new Font("Arial", 16), Brushes.White, 0, 96);
+            dc.DrawString("Elapsed time: " + timer.ElapsedMilliseconds.ToString(), new Font("Arial", 16), Brushes.White, 0, 128);
 #endif
             base.Draw(dc);
         }
@@ -234,7 +248,7 @@ namespace Moley_Heaven_to_Hell
         {
             if (state == State.dig && currentFrameIndex >= 5)
             {
-                SetPosition(new PointF(position.X, position.Y + 200));
+                SetPosition(new PointF(position.X, position.Y + 150));
             }
         }
     }

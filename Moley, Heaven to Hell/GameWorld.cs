@@ -22,6 +22,7 @@ namespace Moley_Heaven_to_Hell
         private static Rectangle displayRectangle;
         private static bool gameRunning;
 
+
         #endregion
         #region Properties
         public static Rectangle DisplayRectangle
@@ -67,7 +68,7 @@ namespace Moley_Heaven_to_Hell
             Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Background1.png", 0));
 
             // All the GameObjects that is in the world to start with, should be added here:
-            Mole player = new Mole(new PointF(displayRectangle.Width / 2, displayRectangle.Height / 2), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png;Sprites\Mole\Fall.png;Sprites\Mole\Idle_Left.png;Sprites\Mole\Dig_Left_1.png;Sprites\Mole\Dig_Left_2.png;Sprites\Mole\Walk_Left_2.png", 5f);
+            Mole player = new Mole(new PointF(displayRectangle.Width / 2, displayRectangle.Height / 2), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png;Sprites\Mole\Fall.png;Sprites\Mole\Idle_Left.png;Sprites\Mole\Dig_Left_1.png;Sprites\Mole\Dig_Left_2.png", 5);
             objects.Add(player);
         }
 
@@ -78,7 +79,7 @@ namespace Moley_Heaven_to_Hell
             deltaTime = 1 / ((float)1000 / milliSeconds);
             endTime = DateTime.Now;
 
-            if (timer.ElapsedMilliseconds >= 1500 && gameRunning)
+            if (timer.ElapsedMilliseconds >= 1000 && gameRunning)
             {
                 int random = rand.Next(0, maxRandom);
                 maxRandom++;
