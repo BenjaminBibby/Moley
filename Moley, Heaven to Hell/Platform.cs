@@ -33,6 +33,13 @@ namespace Moley_Heaven_to_Hell
             CheckCollision();
         }
 
+        public override void Draw(Graphics dc)
+        {
+            base.Draw(dc);
+
+            dc.DrawRectangle(new Pen(Color.Black, 0.1f), position.X, position.Y, CollisionBox.Width, CollisionBox.Height);
+        }
+
         public bool IsCollidingWith(GameObject other)
         {
             return CollisionBox.IntersectsWith((other as ICollidable).CollisionBox);

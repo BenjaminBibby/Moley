@@ -24,15 +24,11 @@ namespace Moley_Heaven_to_Hell
 
         public override void Update(float deltaTime)
         {
-<<<<<<< HEAD
-            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
-=======
             base.Update(deltaTime);
 
             CheckCollision();
 
-            if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
->>>>>>> 0686e973ba58c4dfb9b688d08149ed72eaab1b2c
+            if (PlaceFree_y(5))
             {
                 state = State.fall;
             }
@@ -73,7 +69,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(-15))
                 {
                     position.X -= Acceleration(0.04f);
-                    if (!PlaceFree_y(1));
+                    if (!PlaceFree_y(1))
                     state = State.walk;
                 }
             }
@@ -97,6 +93,13 @@ namespace Moley_Heaven_to_Hell
                 if(state != State.fall)
                 state = State.idle;
             }
+        }
+
+        public override void Draw(Graphics dc)
+        {
+            base.Draw(dc);
+
+            dc.DrawRectangle(new Pen(Color.Black, 0.1f), position.X, position.Y, CollisionBox.Width, CollisionBox.Height);
         }
         private void FlipSprite()
         {
@@ -201,17 +204,6 @@ namespace Moley_Heaven_to_Hell
             }
 
             return true;
-        }
-        private void AvoidStuck()
-        {
-            float[] directions = new float[4];
-            directions[0] = directions[1] = position.X;
-            directions[2] = directions[3] = position.Y;
-
-            for (int i = 0; i < directions.Length; i++)
-            {
-                return;
-            }
         }
     }
 }
