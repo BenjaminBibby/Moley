@@ -28,6 +28,7 @@ namespace Moley_Heaven_to_Hell
         public override void Update(float deltaTime)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (!GameWorld.GameRunning && Keyboard.IsKeyDown(Keys.Space))
             {
                 this.position = startPos;
@@ -55,6 +56,16 @@ namespace Moley_Heaven_to_Hell
             if (!PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
 >>>>>>> 0686e973ba58c4dfb9b688d08149ed72eaab1b2c
 >>>>>>> parent of a5632a2... Small fixes
+=======
+            base.Update(deltaTime);
+
+            CheckCollision();
+
+            if (PlaceFree_y(5))
+=======
+            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+>>>>>>> 61b476864f735cc7dfcd66de67ec57cf2a422105
+>>>>>>> b55ae7827295b63dfd543a0ec5655ca00b9f2bab
             {
                 state = State.fall;
             }
@@ -128,12 +139,21 @@ namespace Moley_Heaven_to_Hell
 
             base.Update(deltaTime);
         }
+<<<<<<< HEAD
         public override void Draw(Graphics dc)
         {
             dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
             base.Draw(dc);
 =======
 >>>>>>> parent of a5632a2... Small fixes
+=======
+
+        public override void Draw(Graphics dc)
+        {
+            base.Draw(dc);
+
+            dc.DrawRectangle(new Pen(Color.Black, 0.1f), position.X, position.Y, CollisionBox.Width, CollisionBox.Height);
+>>>>>>> b55ae7827295b63dfd543a0ec5655ca00b9f2bab
         }
         private void FlipSprite()
         {
