@@ -11,6 +11,7 @@ namespace Moley_Heaven_to_Hell
     class Mole : GameObject, ICollidable
     {
         private bool walkLeft;
+        private PointF startPos, startVelocity;
         private float maxSpeed, speed, gravitySpeed;
         private enum State { idle, walk, fall };
         private State state;
@@ -20,10 +21,27 @@ namespace Moley_Heaven_to_Hell
         {
             this.velocity.Y = 2;
             this.maxSpeed = 10;
+            this.startPos = position;
+            this.startVelocity.Y = this.velocity.Y;
         }
 
         public override void Update(float deltaTime)
         {
+            if (!GameWorld.GameRunning && Keyboard.IsKeyDown(Keys.Space))
+            {
+                this.position = startPos;
+                this.velocity = startVelocity;
+                GameWorld.GameRunning = true;
+
+                foreach (GameObject obj in GameWorld.TmpObjects)
+                {
+                    if(obj is Platform)
+                        Destroy(obj);
+                    if (obj is Background)
+                        (obj as Background).Velocity =  (obj as Background).StartVelocity;
+                }
+            }
+
             if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
             {
                 state = State.fall;
@@ -34,9 +52,14 @@ namespace Moley_Heaven_to_Hell
             }
 
             //If the player has reached the bottom of the screen
-            if (this.position.Y + this.Sprite.Height * this.Size.Y >= GameWorld.DisplayRectangle.Height)
+            if (this.position.Y >= GameWorld.DisplayRectangle.Height || this.position.Y + this.Sprite.Height * this.Size.Y <= 0 )
             {
-                this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
+                GameWorld.GameRunning = false;
+                foreach (GameObject obj in GameWorld.Objects)
+                {
+                    obj.Velocity = new PointF(0,0);
+                }
+                //this.position.Y = GameWorld.DisplayRectangle.Height - this.Sprite.Height * this.Size.Y; //Keep the player at the bottom of the screen
             }
 
             // Adjust animation to current state of movement
@@ -92,6 +115,11 @@ namespace Moley_Heaven_to_Hell
 
             base.Update(deltaTime);
         }
+        public override void Draw(Graphics dc)
+        {
+            dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+            base.Draw(dc);
+        }
         private void FlipSprite()
         {
             foreach (Image spr in animationFrames)
@@ -110,7 +138,7 @@ namespace Moley_Heaven_to_Hell
 
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X,position.Y, this.Sprite.Width * Size.X, this.Sprite.Height * Size.Y); }
+            get { return new RectangleF(position.X + 10,position.Y + 5, 50, 70); }
         }
 
         public bool IsCollidingWith(GameObject other)
@@ -129,7 +157,7 @@ namespace Moley_Heaven_to_Hell
         }
         private bool PlaceFree_x(int x)
         {
-            RectangleF checkBox = new RectangleF(position.X, position.Y, 0, 0);
+            RectangleF checkBox = new RectangleF(CollisionBox.X, CollisionBox.Y, 0, 0);
 
             // Setting the offset of the checkbox
             if (x > 0)
@@ -158,7 +186,7 @@ namespace Moley_Heaven_to_Hell
 
         private bool PlaceFree_y(int y)
         {
-            RectangleF checkBox = new RectangleF(position.X, position.Y, CollisionBox.Width, 0);
+            RectangleF checkBox = new RectangleF(CollisionBox.X, CollisionBox.Y, CollisionBox.Width, 0);
 
             // Setting the offset of the checkbox
             if (y > 0)
