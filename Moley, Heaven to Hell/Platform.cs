@@ -63,8 +63,12 @@ namespace Moley_Heaven_to_Hell
 
         public void OnCollision(GameObject other)
         {
-            if (other is Mole && (other as ICollidable).CollisionBox.Y + (other as ICollidable).CollisionBox.Height < this.position.Y + this.CollisionBox.Height)
-                other.SetPosition(new PointF(other.Position.X, this.position.Y - (other as ICollidable).CollisionBox.Height));
+            while (((other as ICollidable).CollisionBox.Y + (other as ICollidable).CollisionBox.Height) >= this.CollisionBox.Y)
+            {
+                other.Position = new PointF(other.Position.X, other.Position.Y - 1);
+            }
+            /*if (other is Mole && (other as ICollidable).CollisionBox.Y + (other as ICollidable).CollisionBox.Height < this.position.Y + this.CollisionBox.Height)
+                other.SetPosition(new PointF(other.Position.X, this.position.Y - (other as ICollidable).CollisionBox.Height));*/
         }
     }
 }

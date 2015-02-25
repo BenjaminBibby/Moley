@@ -159,7 +159,7 @@ namespace Moley_Heaven_to_Hell
         }
         private bool PlaceFree_x(int x)
         {
-            RectangleF checkBox = new RectangleF(CollisionBox.X, CollisionBox.Y, 0, CollisionBox.Height -5);
+            RectangleF checkBox = new RectangleF(CollisionBox.X, CollisionBox.Y, 0, CollisionBox.Height-1);
 
             // Setting the offset of the checkbox
             if (x > 0)
