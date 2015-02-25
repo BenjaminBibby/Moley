@@ -42,11 +42,11 @@ namespace Moley_Heaven_to_Hell
                 }
             }
 
-            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)))
+            if (PlaceFree_y((int)(this.Sprite.Height * this.Size.Y + 15)) && state != State.dig)
             {
-                state = State.fall;
+               state = State.fall;
             }
-            else if(state != State.walk)
+            else if(state != State.walk && state != State.dig)
             {
                 state = State.idle;
             }
@@ -122,7 +122,7 @@ namespace Moley_Heaven_to_Hell
             {
                 base.currentFrameIndex = 3;
             }
-            else if ((base.currentFrameIndex > 6 || base.currentFrameIndex <= 3) && state == State.dig)  //Idle
+            else if ((base.currentFrameIndex > 6 || base.currentFrameIndex <= 3) && state == State.dig)  //Dig
             {
                 base.currentFrameIndex = 4;
             }
