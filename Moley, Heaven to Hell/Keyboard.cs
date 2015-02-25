@@ -32,8 +32,5 @@ namespace Moley_Heaven_to_Hell
         {
             return GetKeyState(key) == KeyStates.Down;
         }
-
     }
-
-
 }

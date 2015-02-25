@@ -19,7 +19,6 @@ namespace Moley_Heaven_to_Hell
         protected List<Image> animationFrames;
         #endregion
         #region properties
-
         public PointF Size
         {
             get { return size; }
