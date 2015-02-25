@@ -20,6 +20,8 @@ namespace Moley_Heaven_to_Hell
         private float deltaTime;
         private BufferedGraphics backBuffer;
         private static Rectangle displayRectangle;
+        private static bool gameRunning;
+
         #endregion
         #region Properties
         public static Rectangle DisplayRectangle
@@ -33,6 +35,11 @@ namespace Moley_Heaven_to_Hell
         public static List<GameObject> TmpObjects
         {
             get { return GameWorld.tmpObjects; }
+        }
+        public static bool GameRunning
+        {
+            get { return GameWorld.gameRunning; }
+            set { GameWorld.gameRunning = value; }
         }
         #endregion
         #region Constructor
@@ -54,6 +61,7 @@ namespace Moley_Heaven_to_Hell
         {
             timer.Start();
             endTime = DateTime.Now;
+            gameRunning = true;
 
             Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\Background1.png", 1, 0));
             Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Background1.png", 1, 0));
@@ -70,7 +78,7 @@ namespace Moley_Heaven_to_Hell
             deltaTime = 1 / ((float)1000 / milliSeconds);
             endTime = DateTime.Now;
 
-            if (timer.ElapsedMilliseconds >= 1500)
+            if (timer.ElapsedMilliseconds >= 1500 && gameRunning)
             {
                 int random = rand.Next(0, maxRandom);
                 maxRandom++;
@@ -108,6 +116,14 @@ namespace Moley_Heaven_to_Hell
             dc.DrawString("Items: " + objects.Count, f, Brushes.White, 0, 32);
 
 #endif
+            if (!gameRunning)
+            {
+                f = new Font("Arial", 32);
+                dc.DrawString("You lose!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 100, 125));
+                f = new Font("Arial", 16);
+                dc.DrawString("Press spacebar to restart!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 135, 175));
+            }
+
             backBuffer.Render();
         }
         public void Update(float deltaTime)

@@ -9,10 +9,18 @@ namespace Moley_Heaven_to_Hell
 {
     class Background : GameObject
     {
+        private PointF startVelocity;
+
+        public PointF StartVelocity
+        {
+            get { return startVelocity; }
+            set { startVelocity = value; }
+        }
+
         public Background(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
             : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
-        { 
-            
+        {
+            this.startVelocity = velocity;  
         }
 
         public override void Update(float deltaTime)
