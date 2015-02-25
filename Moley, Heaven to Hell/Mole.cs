@@ -65,7 +65,7 @@ namespace Moley_Heaven_to_Hell
                 if (PlaceFree_x(-15))
                 {
                     position.X -= Acceleration(0.04f);
-                    if (!PlaceFree_y(1));
+                    if (!PlaceFree_y(1))
                     state = State.walk;
                 }
             }

@@ -61,7 +61,7 @@ namespace Moley_Heaven_to_Hell
         }
 
         public virtual void Update(float deltaTime)
-        { 
+        {
             
         }
 
