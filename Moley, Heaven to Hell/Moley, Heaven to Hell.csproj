@@ -90,6 +90,9 @@
     <Content Include="Sprites\Backgrounds\Background1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Sprites\Backgrounds\lava.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Sprites\Mole\dig_7.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
