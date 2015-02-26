@@ -11,7 +11,7 @@ namespace Moley_Heaven_to_Hell
 {
     class Background : GameObject
     {
-        private PointF startVelocity;
+        private PointF startVelocity, startPos;
         private Stopwatch time = new Stopwatch();
 
         public PointF StartVelocity
@@ -23,6 +23,7 @@ namespace Moley_Heaven_to_Hell
         public Background(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
             : base(position, velocity, size, imagePath, animationSpeed)
         {
+            this.startPos = position;
             time.Start();
             this.startVelocity = velocity;  
         }
@@ -32,6 +33,7 @@ namespace Moley_Heaven_to_Hell
             if(Keyboard.IsKeyDown(Keys.Space) && !GameWorld.GameRunning)
             {
                 base.currentFrameIndex = 0;
+                this.position = startPos;
                 time.Restart();
             }
             
