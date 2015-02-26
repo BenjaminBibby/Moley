@@ -64,8 +64,8 @@ namespace Moley_Heaven_to_Hell
             endTime = DateTime.Now;
             gameRunning = true;
 
-            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1f,1f), @"Sprites\Backgrounds\lava.png", 0));
-            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1f, 1f), @"Sprites\Backgrounds\lava.png", 0));
+            Objects.Add(new Background(new PointF(0, 0), new PointF(0, 2), new PointF(1f, 1f), @"Sprites\Backgrounds\Background_sky.png;Sprites\Backgrounds\Background_transition.png;Sprites\Backgrounds\Background1.png;Sprites\Backgrounds\lava.png", 0));
+            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1f, 1f), @"Sprites\Backgrounds\Background_sky.png;Sprites\Backgrounds\Background1.png;Sprites\Backgrounds\lava.png;Sprites\Backgrounds\lava.png", 0));
 
             // All the GameObjects that is in the world to start with, should be added here:
             Mole player = new Mole(new PointF(displayRectangle.Width / 2, displayRectangle.Height / 2), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png;Sprites\Mole\Fall.png;Sprites\Mole\Idle_Left.png;Sprites\Mole\dig_1.png;Sprites\Mole\dig_2.png;Sprites\Mole\dig_3.png;Sprites\Mole\dig_4.png;Sprites\Mole\dig_5.png;Sprites\Mole\dig_6.png;Sprites\Mole\dig_7.png", 5);
