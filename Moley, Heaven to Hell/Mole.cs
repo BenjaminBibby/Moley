@@ -73,13 +73,7 @@ namespace Moley_Heaven_to_Hell
 
             if (Keyboard.IsKeyDown(Keys.S) && !PlaceFree_y(5))
             {
-                timer.Start();
-                state = State.dig;
-                
-                if (timer.ElapsedMilliseconds >= 1250)
-                {
-                    Diging();
-                }
+                Diging();
             }
             else if (Keyboard.IsKeyDown(Keys.A) && this.position.X - speed > 0 && state != State.dig)
             {
@@ -246,7 +240,10 @@ namespace Moley_Heaven_to_Hell
         }
         private void Diging()
         {
-            if (state == State.dig && currentFrameIndex >= 5)
+            timer.Start();
+            state = State.dig;
+
+            if (timer.ElapsedMilliseconds >= 1250)
             {
                 SetPosition(new PointF(position.X, position.Y + 150));
             }
