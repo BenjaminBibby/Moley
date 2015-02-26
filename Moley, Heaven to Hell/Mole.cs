@@ -135,7 +135,7 @@ namespace Moley_Heaven_to_Hell
             {
                 base.currentFrameIndex = 3;
             }
-            else if ((base.currentFrameIndex >= 5.9f || base.currentFrameIndex <= 4) && state == State.dig)  //Dig
+            else if ((base.currentFrameIndex >= 10.9f || base.currentFrameIndex <= 4) && state == State.dig)  //Dig
             {
                 base.currentFrameIndex = 4;
             }
