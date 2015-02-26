@@ -40,7 +40,9 @@ namespace Moley_Heaven_to_Hell
                     if(obj is Platform)
                         Destroy(obj);
                     if (obj is Background)
-                        (obj as Background).Velocity =  (obj as Background).StartVelocity;
+                    {
+                        (obj as Background).Velocity = (obj as Background).StartVelocity;
+                    }
                 }
             }
 
