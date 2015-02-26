@@ -32,13 +32,15 @@ namespace Moley_Heaven_to_Hell
             if(Keyboard.IsKeyDown(Keys.Space) && !GameWorld.GameRunning)
             {
                 base.currentFrameIndex = 0;
+                time.Restart();
             }
             
-            if (time.ElapsedMilliseconds >= 5000)
+            if (time.ElapsedMilliseconds >= 5000 & GameWorld.GameRunning)
             {
                 if (this.position.Y >= GameWorld.DisplayRectangle.Height)
                 {
-                    time.Reset();
+                    time.Restart();
+                    if(base.currentFrameIndex < 3)
                     base.currentFrameIndex++;
                 }
             }
