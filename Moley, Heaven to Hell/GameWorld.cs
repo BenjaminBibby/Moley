@@ -64,8 +64,8 @@ namespace Moley_Heaven_to_Hell
             endTime = DateTime.Now;
             gameRunning = true;
 
-            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\Background1.png", 0));
-            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\Background1.png", 0));
+            Objects.Add(new Background(new PointF(0,0), new PointF(0,2), new PointF(1.5f,1.5f), @"Sprites\Backgrounds\lava.png", 0));
+            Objects.Add(new Background(new PointF(0, displayRectangle.Height), new PointF(0, 2), new PointF(1.5f, 1.5f), @"Sprites\Backgrounds\lava.png", 0));
 
             // All the GameObjects that is in the world to start with, should be added here:
             Mole player = new Mole(new PointF(displayRectangle.Width / 2, displayRectangle.Height / 2), new PointF(0, 0), new PointF(0.5f, 0.5f), @"Sprites\Mole\Walk_Left_1.png;Sprites\Mole\Walk_Left_2.png;Sprites\Mole\Fall.png;Sprites\Mole\Idle_Left.png;Sprites\Mole\dig_1.png;Sprites\Mole\dig_2.png;Sprites\Mole\dig_3.png;Sprites\Mole\dig_4.png;Sprites\Mole\dig_5.png;Sprites\Mole\dig_6.png;Sprites\Mole\dig_7.png", 5);
@@ -119,13 +119,12 @@ namespace Moley_Heaven_to_Hell
 #if DEBUG
             dc.DrawString("Fps: " + 1 / deltaTime, f, Brushes.White, 0, 0);
             dc.DrawString("Items: " + objects.Count, f, Brushes.White, 0, 32);
-
 #endif
             if (!gameRunning)
             {
-                f = new Font("Arial", 32);
+                f = new Font("Comic Sans MS", 32);
                 dc.DrawString("You lose!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 100, 125));
-                f = new Font("Arial", 16);
+                f = new Font("Comic Sans MS", 16);
                 dc.DrawString("Press spacebar to restart!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 135, 175));
             }
 

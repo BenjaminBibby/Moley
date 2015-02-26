@@ -71,7 +71,7 @@ namespace Moley_Heaven_to_Hell
                 timer.Reset();
             }
 
-            if (Keyboard.IsKeyDown(Keys.S) && !PlaceFree_y(5))
+            if (Keyboard.IsKeyDown(Keys.S) && !PlaceFree_y(5) && GameWorld.GameRunning)
             {
                 Diging();
             }
