@@ -15,6 +15,7 @@ namespace Moley_Heaven_to_Hell
         private Random rand = new Random();
         private static List<GameObject> tmpObjects, objects;
         private Stopwatch timer = new Stopwatch();
+        private Stopwatch scoreTime = new Stopwatch();
         private Graphics dc;
         private DateTime endTime;
         private float deltaTime;
@@ -61,6 +62,7 @@ namespace Moley_Heaven_to_Hell
         public void SetupWorld()
         {
             timer.Start();
+            scoreTime.Start();
             endTime = DateTime.Now;
             gameRunning = true;
 
@@ -116,16 +118,29 @@ namespace Moley_Heaven_to_Hell
             {
                 obj.Draw(dc);
             }
+
+            if (gameRunning)
+            {
+                if (!scoreTime.IsRunning)
+                {
+                    scoreTime.Restart();
+                }
+                f = new Font("Arial", 16);
+                dc.DrawString("Score: " + scoreTime.ElapsedMilliseconds / 1000, f, Brushes.White, new PointF(0, 0));
+            }
 #if DEBUG
             dc.DrawString("Fps: " + 1 / deltaTime, f, Brushes.White, 0, 0);
             dc.DrawString("Items: " + objects.Count, f, Brushes.White, 0, 32);
 #endif
             if (!gameRunning)
             {
+                scoreTime.Stop();
                 f = new Font("Comic Sans MS", 32);
                 dc.DrawString("You lose!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 100, 125));
                 f = new Font("Comic Sans MS", 16);
                 dc.DrawString("Press spacebar to restart!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 135, 175));
+                f = new Font("Arial", 16);
+                dc.DrawString("You survived for " + scoreTime.ElapsedMilliseconds / 1000 + " seconds!", f, Brushes.White, new PointF(displayRectangle.Width * 0.5f - 140, 210));
             }
 
             backBuffer.Render();
