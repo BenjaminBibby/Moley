@@ -11,11 +11,11 @@ namespace Moley_Heaven_to_Hell
     {
         public RectangleF CollisionBox
         {
-            get { return new RectangleF(position.X, position.Y, Sprite.Width * Size.X, Sprite.Height * Size.Y); }
+            get { return new RectangleF(position.X, position.Y, Sprite.Width * Size.X, Sprite.Height * Size.Y * 0.5f); }
         }
 
-        public Platform(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
-            : base(position, velocity, size, imagePath, imageAmount, animationSpeed)
+        public Platform(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
+            : base(position, velocity, size, imagePath, animationSpeed)
         {
             
         }
@@ -33,10 +33,19 @@ namespace Moley_Heaven_to_Hell
             CheckCollision();
         }
 
+        public override void Draw(Graphics dc)
+        {
+#if DEBUG
+            dc.DrawRectangle(new Pen(Brushes.Red, 0.1f), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+#endif
+            base.Draw(dc);
+        }
+
         public bool IsCollidingWith(GameObject other)
         {
             return CollisionBox.IntersectsWith((other as ICollidable).CollisionBox);
         }
+
 
         public void CheckCollision()
         {
@@ -54,8 +63,10 @@ namespace Moley_Heaven_to_Hell
 
         public void OnCollision(GameObject other)
         {
-            if (other is Mole && other.Position.Y + other.Sprite.Height * other.Size.Y < this.position.Y + this.Sprite.Height * this.Size.Y)
-                other.SetPosition(new PointF(other.Position.X, this.position.Y - other.Sprite.Height * other.Size.Y));
+            while (((other as ICollidable).CollisionBox.Y + (other as ICollidable).CollisionBox.Height) >= this.CollisionBox.Y)
+            {
+                other.Position = new PointF(other.Position.X, other.Position.Y - 1);
+            }
         }
     }
 }

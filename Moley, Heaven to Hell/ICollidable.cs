@@ -16,6 +16,5 @@ namespace Moley_Heaven_to_Hell
         bool IsCollidingWith(GameObject other);
         void CheckCollision();
         void OnCollision(GameObject other);
-
     }
 }

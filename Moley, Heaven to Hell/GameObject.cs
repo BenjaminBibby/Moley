@@ -14,12 +14,11 @@ namespace Moley_Heaven_to_Hell
         private PointF size;
         protected PointF velocity;
         protected float animationSpeed;
-        private float currentFrameIndex;
+        protected float currentFrameIndex;
         private Image sprite;
         protected List<Image> animationFrames;
         #endregion
         #region properties
-
         public PointF Size
         {
             get { return size; }
@@ -42,9 +41,8 @@ namespace Moley_Heaven_to_Hell
         }
         #endregion
 
-        public GameObject(PointF position, PointF velocity, PointF size, string imagePath, int imageAmount, float animationSpeed)
+        public GameObject(PointF position, PointF velocity, PointF size, string imagePath, float animationSpeed)
         {
-            //string[] images = new string[imageAmount];
             this.position = position;
             this.velocity = velocity;
             this.size = size;
@@ -61,7 +59,7 @@ namespace Moley_Heaven_to_Hell
         }
 
         public virtual void Update(float deltaTime)
-        { 
+        {
             
         }
 
